@@ -8,11 +8,21 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <h3>{{app.name}} {{app.version}}</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>App name</ion-label>
+      <ion-input type="text" [(ngModel)]="app.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>App version</ion-label>
+      <ion-input type="number" [(ngModel)]="app.version"></ion-input>
+    </ion-item>
+
+  </ion-list>
 
   <button ion-button secondary menuToggle>Toggle Menu</button>
 </ion-content>
