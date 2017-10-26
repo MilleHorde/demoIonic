@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {Camera} from '@ionic-native/camera';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 
 /**
  * Generated class for the TakePicturePage page.
@@ -17,7 +18,7 @@ import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 export class TakePicturePage {
   public img: string;
 
-  constructor(public navCtrl: NavController, public camera: Camera, public base64ToGallery: Base64ToGallery) {
+  constructor(public navCtrl: NavController, public camera: Camera, public base64ToGallery: Base64ToGallery, public spinnerDialog: SpinnerDialog) {
   }
 
   takePicture() {
@@ -27,10 +28,11 @@ export class TakePicturePage {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }).then((imageData) => {
+      this.spinnerDialog.show();
       this.img = 'data:image/jpeg;base64,' + imageData;
       this.base64ToGallery.base64ToGallery(imageData, { prefix: '_img' }).then(
-        res => console.log('Saved image to gallery ', res),
-        err => console.log('Error saving image to gallery ', err)
+        res => this.spinnerDialog.hide(),
+        err => {this.spinnerDialog.hide(); alert("Error "+err);}
       );
     }, (err) => {
       console.log(err)

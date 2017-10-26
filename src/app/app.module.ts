@@ -11,6 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {Camera} from '@ionic-native/camera';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Camera,
-    Base64ToGallery
+    Base64ToGallery,
+    SpinnerDialog
   ]
 })
 export class AppModule {}
