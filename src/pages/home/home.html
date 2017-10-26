@@ -26,5 +26,7 @@
 
   <button (click)="takePicture()">Take a Picture</button>
 
+  <img [src]="img" *ngIf="img" />
+
   <button ion-button secondary menuToggle>Toggle Menu</button>
 </ion-content>
