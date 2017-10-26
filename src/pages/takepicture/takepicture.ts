@@ -28,7 +28,7 @@ export class TakePicturePage {
       mediaType: this.camera.MediaType.PICTURE
     }).then((imageData) => {
       this.img = 'data:image/jpeg;base64,' + imageData;
-      this.base64ToGallery.base64ToGallery(this.img, { prefix: '_img' }).then(
+      this.base64ToGallery.base64ToGallery(imageData, { prefix: '_img' }).then(
         res => console.log('Saved image to gallery ', res),
         err => console.log('Error saving image to gallery ', err)
       );
