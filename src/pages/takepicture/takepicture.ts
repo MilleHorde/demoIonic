@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {Camera} from '@ionic-native/camera';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 
 /**
  * Generated class for the TakePicturePage page.
@@ -16,7 +17,7 @@ import {Camera} from '@ionic-native/camera';
 export class TakePicturePage {
   public img: string;
 
-  constructor(public navCtrl: NavController, public camera: Camera) {
+  constructor(public navCtrl: NavController, public camera: Camera, public base64ToGallery: Base64ToGallery) {
   }
 
   takePicture() {
@@ -26,9 +27,11 @@ export class TakePicturePage {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64:
       this.img = 'data:image/jpeg;base64,' + imageData;
+      this.base64ToGallery.base64ToGallery(this.img, { prefix: '_img' }).then(
+        res => console.log('Saved image to gallery ', res),
+        err => console.log('Error saving image to gallery ', err)
+      );
     }, (err) => {
       console.log(err)
     });

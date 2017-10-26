@@ -10,6 +10,7 @@ import { TakePicturePage } from '../pages/takepicture/takepicture';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {Camera} from '@ionic-native/camera';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {Camera} from '@ionic-native/camera';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Camera
+    Camera,
+    Base64ToGallery
   ]
 })
 export class AppModule {}
