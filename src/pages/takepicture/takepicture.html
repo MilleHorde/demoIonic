@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Take a picture</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Take a picture</h3>
+
+  <button ion-button secondary (click)="takePicture()">Take a Picture</button>
+
+  <img [src]="img" *ngIf="img" />
+</ion-content>
