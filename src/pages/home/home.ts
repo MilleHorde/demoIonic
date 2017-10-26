@@ -8,7 +8,7 @@ import {Camera} from '@ionic-native/camera';
 })
 export class HomePage {
   app: any = {name: String, version: Number};
-  img: string;
+  public img: string;
 
   constructor(public navCtrl: NavController, public camera: Camera) {
     this.app.name = "AppName";
