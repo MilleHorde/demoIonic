@@ -12,16 +12,15 @@
 
   <button ion-button (click)="takePicture()">Take a Picture</button>
   <button ion-button [disabled]="!srcImage" (click)="saving()">Save last Picture</button>
-
-  <ion-card *ngIf="srcImage" >
-
-    <img [src]="srcImage" />
-    <ion-fab right top>
-      <button ion-fab>
-        <ion-icon name="close" (click)="closeCurrentImage()"></ion-icon>
-      </button>
-    </ion-fab>
-
-  </ion-card>
+  <div>
+    <ion-card *ngIf="srcImage">
+      <img [src]="srcImage"/>
+      <ion-fab right top>
+        <button ion-fab>
+          <ion-icon name="close" (click)="closeCurrentImage()"></ion-icon>
+        </button>
+      </ion-fab>
+    </ion-card>
+  </div>
 
 </ion-content>
