@@ -19,7 +19,6 @@ import {AlertController} from 'ionic-angular';
 export class TakePicturePage {
   public srcImage: string;
   public imageData: string;
-  public loading: any;
 
   constructor(public navCtrl: NavController,
               public camera: Camera,
