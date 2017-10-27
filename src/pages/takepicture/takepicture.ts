@@ -52,21 +52,21 @@ export class TakePicturePage {
   }
 
   saving() {
-    this.loading = this.loadingCtrl.create({content: "Saving picture, please wait..."});
-    this.loading.present()
+    let loading = this.loadingCtrl.create({content: "Saving picture, please wait..."});
+    loading.present()
       .then(()=>{
-        this.savePicture();
+        this.savePicture(loading);
       });
   }
 
-  savePicture() {
-    this.base64ToGallery.base64ToGallery(this.imageData, {prefix: 'img'}).then(
+  savePicture(loading) {
+    this.base64ToGallery.base64ToGallery(this.imageData, {prefix: '_img'}).then(
       res => {
-        this.loading.dismiss();
+        loading.dismiss();
         this.showAlert("Picture saved", "Your picture has been saved in your gallery.", "OK");
       },
       err => {
-        this.loading.dismiss();
+        loading.dismiss();
         this.showAlert("Saving error", err.toString(), "OK");
       }
     );
