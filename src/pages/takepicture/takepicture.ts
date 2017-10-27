@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {Camera} from '@ionic-native/camera';
-import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
-import { SpinnerDialog } from '@ionic-native/spinner-dialog';
-import { AlertController } from 'ionic-angular';
+import {Base64ToGallery} from '@ionic-native/base64-to-gallery';
+import {LoadingController} from 'ionic-angular';
+import {AlertController} from 'ionic-angular';
 
 /**
  * Generated class for the TakePicturePage page.
@@ -19,14 +19,13 @@ import { AlertController } from 'ionic-angular';
 export class TakePicturePage {
   public srcImage: string;
   public imageData: string;
+  private loading: any;
 
-  constructor(
-    public navCtrl: NavController,
-    public camera: Camera,
-    public base64ToGallery: Base64ToGallery,
-    public spinnerDialog: SpinnerDialog,
-    public alertCtrl: AlertController
-  ) {
+  constructor(public navCtrl: NavController,
+              public camera: Camera,
+              public base64ToGallery: Base64ToGallery,
+              public loadingCtrl: LoadingController,
+              public alertCtrl: AlertController) {
   }
 
   takePicture() {
@@ -52,11 +51,31 @@ export class TakePicturePage {
     alert.present();
   }
 
-  savePicture(){
-    this.spinnerDialog.show();
-    this.base64ToGallery.base64ToGallery(this.imageData, { prefix: 'img' }).then(
-      res => this.spinnerDialog.hide(),
-      err => {this.spinnerDialog.hide(); this.showAlert("Saving error", err.toString(), "OK");}
+  presentLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+
+    this.loading.present();
+  }
+
+  dismissLoading() {
+    if (this.loading) {
+      this.loading.dismissAll();
+    }
+  }
+
+  savePicture() {
+    this.presentLoading();
+    this.base64ToGallery.base64ToGallery(this.imageData, {prefix: 'img'}).then(
+      res => {
+        this.dismissLoading();
+        this.showAlert("Picture saved", "Your picture has been saved in your gallery.", "OK");
+      },
+      err => {
+        this.dismissLoading();
+        this.showAlert("Saving error", err.toString(), "OK");
+      }
     );
   }
 
