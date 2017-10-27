@@ -4,7 +4,7 @@ import {Camera} from '@ionic-native/camera';
 import {Base64ToGallery} from '@ionic-native/base64-to-gallery';
 import {LoadingController} from 'ionic-angular';
 import {AlertController} from 'ionic-angular';
-import { ChangeDetectorRef } from '@angular/core';
+import { NgZone } from '@angular/core';
 
 /**
  * Generated class for the TakePicturePage page.
@@ -26,7 +26,7 @@ export class TakePicturePage {
               public base64ToGallery: Base64ToGallery,
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController,
-              public changeDetectorRef: ChangeDetectorRef) {
+              public zone: NgZone) {
   }
 
   takePicture() {
@@ -74,9 +74,10 @@ export class TakePicturePage {
   }
 
   closeCurrentImage(){
-    this.srcImage = "";
-    this.imageData = "";
-    this.changeDetectorRef.markForCheck();
+    this.zone.run(()=>{
+      this.srcImage = "";
+      this.imageData = "";
+    });
   }
 
 }
