@@ -19,7 +19,6 @@ import {AlertController} from 'ionic-angular';
 export class TakePicturePage {
   public srcImage: string;
   public imageData: string;
-  private loading: any;
 
   constructor(public navCtrl: NavController,
               public camera: Camera,
@@ -51,29 +50,19 @@ export class TakePicturePage {
     alert.present();
   }
 
-  presentLoading() {
-    this.loading = this.loadingCtrl.create({
+  savePicture() {
+    let loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
 
-    this.loading.present();
-  }
-
-  dismissLoading() {
-    if (this.loading) {
-      this.loading.dismissAll();
-    }
-  }
-
-  savePicture() {
-    this.presentLoading();
+    loading.present();
     this.base64ToGallery.base64ToGallery(this.imageData, {prefix: 'img'}).then(
       res => {
-        this.dismissLoading();
+        loading.dismissAll();
         this.showAlert("Picture saved", "Your picture has been saved in your gallery.", "OK");
       },
       err => {
-        this.dismissLoading();
+        loading.dismissAll();
         this.showAlert("Saving error", err.toString(), "OK");
       }
     );
