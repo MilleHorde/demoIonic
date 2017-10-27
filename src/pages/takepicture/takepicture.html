@@ -10,7 +10,7 @@
 <ion-content padding>
   <h3>Take a picture</h3>
 
-  <button ion-button *ngIf="srcImage" (click)="takePicture()">Take a Picture</button>
+  <button ion-button (click)="takePicture()">Take a Picture</button>
   <button ion-button *ngIf="srcImage" (click)="savePicture()">Save last Picture</button>
 
   <img [src]="srcImage" *ngIf="srcImage" />
