@@ -11,10 +11,10 @@
   <h3>Take a picture</h3>
 
   <button ion-button (click)="takePicture()">Take a Picture</button>
-  <button ion-button [disabled]="!srcImage" (click)="saving()">Save last Picture</button>
+  <button ion-button [(disabled)]="!srcImage" (click)="saving()">Save last Picture</button>
   <div>
     <ion-card *ngIf="srcImage">
-      <img [src]="srcImage"/>
+      <img [(src)]="srcImage"/>
       <ion-fab right top>
         <button ion-fab>
           <ion-icon name="close" (click)="closeCurrentImage()"></ion-icon>
