@@ -15,11 +15,11 @@
   <div>
     <ion-card *ngIf="srcImage">
       <img [src]="srcImage"/>
-      <ion-item>
+      <ion-fab right top>
         <button ion-fab (click)="closeCurrentImage()">
           <ion-icon name="close"></ion-icon>
         </button>
-      </ion-item>
+      </ion-fab>
     </ion-card>
   </div>
 

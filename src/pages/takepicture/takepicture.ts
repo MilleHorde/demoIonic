@@ -4,7 +4,6 @@ import {Camera} from '@ionic-native/camera';
 import {Base64ToGallery} from '@ionic-native/base64-to-gallery';
 import {LoadingController} from 'ionic-angular';
 import {AlertController} from 'ionic-angular';
-import { NgZone } from '@angular/core';
 
 /**
  * Generated class for the TakePicturePage page.
@@ -55,7 +54,7 @@ export class TakePicturePage {
   saving() {
     let loading = this.loadingCtrl.create({content: "Saving picture, please wait..."});
     loading.present()
-      .then(()=>{
+      .then(() => {
         this.savePicture(loading);
       });
   }
@@ -73,11 +72,9 @@ export class TakePicturePage {
     );
   }
 
-  closeCurrentImage(){
-    this.zone.run(()=>{
-      this.srcImage = "";
-      this.imageData = "";
-    });
+  closeCurrentImage() {
+    this.srcImage = "";
+    this.imageData = "";
   }
 
 }
