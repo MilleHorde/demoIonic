@@ -60,14 +60,14 @@ export class TakePicturePage {
 
   savePicture() {
     this.presentLoading();
-    // this.base64ToGallery.base64ToGallery(this.imageData, {prefix: 'img'}).then(
-    //   res => {
-    //     this.showAlert("Picture saved", "Your picture has been saved in your gallery.", "OK");
-    //   },
-    //   err => {
-    //     this.showAlert("Saving error", err.toString(), "OK");
-    //   }
-    // );
+    this.base64ToGallery.base64ToGallery(this.imageData, {prefix: 'img'}).then(
+      res => {
+        this.showAlert("Picture saved", "Your picture has been saved in your gallery.", "OK");
+      },
+      err => {
+        this.showAlert("Saving error", err.toString(), "OK");
+      }
+    );
   }
 
 }
