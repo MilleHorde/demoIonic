@@ -72,8 +72,8 @@ export class TakePicturePage {
   }
 
   closeCurrentImage(){
-    this.srcImage = null;
-    this.imageData = null;
+    this.srcImage = "";
+    this.imageData = "";
   }
 
 }
