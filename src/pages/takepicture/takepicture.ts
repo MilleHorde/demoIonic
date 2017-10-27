@@ -76,7 +76,7 @@ export class TakePicturePage {
   closeCurrentImage(){
     this.srcImage = "";
     this.imageData = "";
-    this.changeDetectorRef.detectChanges();
+    this.changeDetectorRef.markForCheck();
   }
 
 }
