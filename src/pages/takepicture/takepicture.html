@@ -11,7 +11,7 @@
   <h3>Take a picture</h3>
 
   <button ion-button (click)="takePicture()">Take a Picture</button>
-  <button ion-button *ngIf="srcImage" (click)="saving()">Save last Picture</button>
+  <button ion-button [disabled]="!srcImage" (click)="saving()">Save last Picture</button>
 
   <img [src]="srcImage" *ngIf="srcImage" />
 
