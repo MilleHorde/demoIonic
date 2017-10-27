@@ -24,8 +24,7 @@ export class TakePicturePage {
               public camera: Camera,
               public base64ToGallery: Base64ToGallery,
               public loadingCtrl: LoadingController,
-              public alertCtrl: AlertController,
-              public zone: NgZone) {
+              public alertCtrl: AlertController) {
   }
 
   takePicture() {
