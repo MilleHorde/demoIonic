@@ -50,21 +50,19 @@ export class TakePicturePage {
     alert.present();
   }
 
-  presentLoading() {
-      let loading = this.loadingCtrl.create({
-        content: 'Saving picture, Please wait...'
-      });
-
-      loading.present();
-  }
-
   savePicture() {
-    this.presentLoading();
+    let loading = this.loadingCtrl.create({
+      content: 'Saving picture, Please wait...'
+    });
+
+    loading.present();
     this.base64ToGallery.base64ToGallery(this.imageData, {prefix: 'img'}).then(
       res => {
+        loading.dismiss();
         this.showAlert("Picture saved", "Your picture has been saved in your gallery.", "OK");
       },
       err => {
+        loading.dismiss();
         this.showAlert("Saving error", err.toString(), "OK");
       }
     );
