@@ -3,6 +3,7 @@ import {NavController} from 'ionic-angular';
 import {Camera} from '@ionic-native/camera';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the TakePicturePage page.
@@ -16,9 +17,16 @@ import { SpinnerDialog } from '@ionic-native/spinner-dialog';
   templateUrl: 'takepicture.html',
 })
 export class TakePicturePage {
-  public img: string;
+  public srcImage: string;
+  public imageData: string;
 
-  constructor(public navCtrl: NavController, public camera: Camera, public base64ToGallery: Base64ToGallery, public spinnerDialog: SpinnerDialog) {
+  constructor(
+    public navCtrl: NavController,
+    public camera: Camera,
+    public base64ToGallery: Base64ToGallery,
+    public spinnerDialog: SpinnerDialog,
+    public alertCtrl: AlertController
+  ) {
   }
 
   takePicture() {
@@ -28,15 +36,28 @@ export class TakePicturePage {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }).then((imageData) => {
-      this.spinnerDialog.show();
-      this.img = 'data:image/jpeg;base64,' + imageData;
-      this.base64ToGallery.base64ToGallery(imageData, { prefix: '_img' }).then(
-        res => this.spinnerDialog.hide(),
-        err => {this.spinnerDialog.hide(); alert("Error "+err);}
-      );
+      this.srcImage = 'data:image/jpeg;base64,' + imageData;
+      this.imageData = imageData;
     }, (err) => {
-      console.log(err)
+      this.showAlert("Taking picture error", err.toString(), "OK")
     });
+  }
+
+  showAlert(title: string, subTitle: string, button: string) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: subTitle,
+      buttons: [button]
+    });
+    alert.present();
+  }
+
+  savePicture(){
+    this.spinnerDialog.show();
+    this.base64ToGallery.base64ToGallery(this.imageData, { prefix: 'img' }).then(
+      res => this.spinnerDialog.hide(),
+      err => {this.spinnerDialog.hide(); this.showAlert("Saving error", err.toString(), "OK");}
+    );
   }
 
 }
