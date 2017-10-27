@@ -71,4 +71,9 @@ export class TakePicturePage {
     );
   }
 
+  closeCurrentImage(){
+    this.srcImage = null;
+    this.imageData = null;
+  }
+
 }
