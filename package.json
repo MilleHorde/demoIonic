@@ -31,6 +31,7 @@
     "cordova-base64-to-gallery": "^4.1.2",
     "cordova-plugin-camera": "^2.4.1",
     "cordova-plugin-ionic": "^2.0.2",
+    "cordova-plugin-media-capture": "^1.4.3",
     "cordova-plugin-native-spinner": "^1.1.3",
     "ionic-angular": "3.7.1",
     "ionicons": "3.0.0",
@@ -52,7 +53,8 @@
         "APP_ID": "1355445a",
         "CHANNEL_NAME": "Master",
         "UPDATE_METHOD": "auto"
-      }
+      },
+      "cordova-plugin-media-capture": {}
     }
   }
 }
