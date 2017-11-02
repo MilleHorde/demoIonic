@@ -56,11 +56,6 @@ export class TakePicturePage {
     this.mediaCapture.captureVideo(options)
       .then(
         (data: MediaFile[]) => {
-          this.localNotifications.schedule({
-            id: 2,
-            text: 'Video taken',
-            data : {secret: "success"}
-          });
           this.srcVideo = data[0].fullPath;
         },
         (err: CaptureError) => alert(err)
