@@ -41,7 +41,8 @@ export class TakePicturePage {
     }).then((imageData) => {
       this.localNotifications.schedule({
         id: 1,
-        text: 'Picture taken'
+        text: 'Picture taken',
+        data : {secret: "success"}
       });
       this.srcImage = 'data:image/jpeg;base64,' + imageData;
       this.imageData = imageData;
@@ -57,7 +58,8 @@ export class TakePicturePage {
         (data: MediaFile[]) => {
           this.localNotifications.schedule({
             id: 2,
-            text: 'Video taken'
+            text: 'Video taken',
+            data : {secret: "success"}
           });
           this.srcVideo = data[0].fullPath;
         },
@@ -80,7 +82,8 @@ export class TakePicturePage {
       .then(() => {
         this.localNotifications.schedule({
           id: 3,
-          text: 'Saving picture, please wait...'
+          text: 'Saving picture, please wait...',
+          data : {secret: "wait"}
         });
         this.savePicture(loading);
       });
@@ -92,7 +95,8 @@ export class TakePicturePage {
         loading.dismiss();
         this.localNotifications.schedule({
           id: 4,
-          text: 'Picture saved'
+          text: 'Picture saved',
+          data : {secret: "success"}
         });
         this.showAlert("Picture saved", "Your picture has been saved in your gallery.", "OK");
       },
@@ -100,7 +104,8 @@ export class TakePicturePage {
         loading.dismiss();
         this.localNotifications.schedule({
           id: 5,
-          text: 'Saving picture error'
+          text: 'Saving picture error',
+          data : {secret: "error"}
         });
         this.showAlert("Saving error", err.toString(), "OK");
       }
