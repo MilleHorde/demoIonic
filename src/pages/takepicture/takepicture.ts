@@ -4,6 +4,7 @@ import {Camera} from '@ionic-native/camera';
 import {Base64ToGallery} from '@ionic-native/base64-to-gallery';
 import {LoadingController} from 'ionic-angular';
 import {AlertController} from 'ionic-angular';
+import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 
 /**
  * Generated class for the TakePicturePage page.
@@ -19,12 +20,14 @@ import {AlertController} from 'ionic-angular';
 export class TakePicturePage {
   public srcImage: string;
   public imageData: string;
+  public srcVideo: any;
 
   constructor(public navCtrl: NavController,
               public camera: Camera,
               public base64ToGallery: Base64ToGallery,
               public loadingCtrl: LoadingController,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              private mediaCapture: MediaCapture) {
   }
 
   takePicture() {
@@ -39,6 +42,15 @@ export class TakePicturePage {
     }, (err) => {
       this.showAlert("Taking picture error", err.toString(), "OK")
     });
+  }
+
+  takeVideo() {
+    let options: CaptureImageOptions = { limit: 1 };
+    this.mediaCapture.captureVideo(options)
+      .then(
+        (data: MediaFile[]) => this.srcVideo = data,
+        (err: CaptureError) => console.error(err)
+      );
   }
 
   showAlert(title: string, subTitle: string, button: string) {
@@ -69,6 +81,10 @@ export class TakePicturePage {
         this.showAlert("Saving error", err.toString(), "OK");
       }
     );
+  }
+
+  closeCurrentVideo() {
+    this.srcVideo = "";
   }
 
   closeCurrentImage() {

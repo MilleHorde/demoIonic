@@ -12,11 +12,23 @@
 
   <button ion-button (click)="takePicture()">Take a Picture</button>
   <button ion-button [(disabled)]="!srcImage" (click)="saving()">Save last Picture</button>
+  <button ion-button (click)="takeVideo()">Take a Video</button>
   <div>
     <ion-card *ngIf="srcImage">
       <img [src]="srcImage"/>
       <ion-fab right top>
         <button ion-fab (click)="closeCurrentImage()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-fab>
+    </ion-card>
+  </div>
+  <div>
+    <ion-card *ngIf="srcVideo">
+      <video [src]="srcVideo" autoplay>!
+      </video>
+      <ion-fab right top>
+        <button ion-fab (click)="closeCurrentVideo()">
           <ion-icon name="close"></ion-icon>
         </button>
       </ion-fab>

@@ -10,6 +10,7 @@ import { TakePicturePage } from '../pages/takepicture/takepicture';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {Camera} from '@ionic-native/camera';
+import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 
@@ -37,7 +38,8 @@ import { SpinnerDialog } from '@ionic-native/spinner-dialog';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Camera,
     Base64ToGallery,
-    SpinnerDialog
+    SpinnerDialog,
+    MediaCapture
   ]
 })
 export class AppModule {}
