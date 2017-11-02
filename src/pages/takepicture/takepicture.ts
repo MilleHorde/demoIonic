@@ -56,7 +56,7 @@ export class TakePicturePage {
       .then(
         (data: MediaFile[]) => {
           this.localNotifications.schedule({
-            id: 1,
+            id: 2,
             text: 'Video taken'
           });
           this.srcVideo = data[0].fullPath;
@@ -79,7 +79,7 @@ export class TakePicturePage {
     loading.present()
       .then(() => {
         this.localNotifications.schedule({
-          id: 1,
+          id: 3,
           text: 'Saving picture, please wait...'
         });
         this.savePicture(loading);
@@ -91,7 +91,7 @@ export class TakePicturePage {
       res => {
         loading.dismiss();
         this.localNotifications.schedule({
-          id: 1,
+          id: 4,
           text: 'Picture saved'
         });
         this.showAlert("Picture saved", "Your picture has been saved in your gallery.", "OK");
@@ -99,7 +99,7 @@ export class TakePicturePage {
       err => {
         loading.dismiss();
         this.localNotifications.schedule({
-          id: 1,
+          id: 5,
           text: 'Saving picture error'
         });
         this.showAlert("Saving error", err.toString(), "OK");
