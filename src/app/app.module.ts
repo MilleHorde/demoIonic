@@ -13,6 +13,7 @@ import {Camera} from '@ionic-native/camera';
 import { MediaCapture } from '@ionic-native/media-capture';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SpinnerDialog } from '@ionic-native/spinner-dialog';
     Camera,
     Base64ToGallery,
     SpinnerDialog,
-    MediaCapture
+    MediaCapture,
+    LocalNotifications
   ]
 })
 export class AppModule {}
