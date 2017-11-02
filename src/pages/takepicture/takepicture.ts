@@ -5,6 +5,7 @@ import {Base64ToGallery} from '@ionic-native/base64-to-gallery';
 import {LoadingController} from 'ionic-angular';
 import {AlertController} from 'ionic-angular';
 import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 /**
  * Generated class for the TakePicturePage page.
@@ -27,7 +28,8 @@ export class TakePicturePage {
               public base64ToGallery: Base64ToGallery,
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController,
-              private mediaCapture: MediaCapture) {
+              private mediaCapture: MediaCapture,
+              private localNotifications: LocalNotifications) {
   }
 
   takePicture() {
@@ -37,6 +39,10 @@ export class TakePicturePage {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }).then((imageData) => {
+      this.localNotifications.schedule({
+        id: 1,
+        text: 'Picture taken'
+      });
       this.srcImage = 'data:image/jpeg;base64,' + imageData;
       this.imageData = imageData;
     }, (err) => {
@@ -49,15 +55,11 @@ export class TakePicturePage {
     this.mediaCapture.captureVideo(options)
       .then(
         (data: MediaFile[]) => {
-          let video = {};
-          let options = {
-            sourceType: 2,
-            mediaType: 1
-          };
-
-          this.camera.getPicture(options).then((data) => {
-            this.srcVideo = data;
+          this.localNotifications.schedule({
+            id: 1,
+            text: 'Video taken'
           });
+          this.srcVideo = data[0].fullPath;
         },
         (err: CaptureError) => alert(err)
       );
@@ -76,6 +78,10 @@ export class TakePicturePage {
     let loading = this.loadingCtrl.create({content: "Saving picture, please wait..."});
     loading.present()
       .then(() => {
+        this.localNotifications.schedule({
+          id: 1,
+          text: 'Saving picture, please wait...'
+        });
         this.savePicture(loading);
       });
   }
@@ -84,10 +90,18 @@ export class TakePicturePage {
     this.base64ToGallery.base64ToGallery(this.imageData, {prefix: '_img'}).then(
       res => {
         loading.dismiss();
+        this.localNotifications.schedule({
+          id: 1,
+          text: 'Picture saved'
+        });
         this.showAlert("Picture saved", "Your picture has been saved in your gallery.", "OK");
       },
       err => {
         loading.dismiss();
+        this.localNotifications.schedule({
+          id: 1,
+          text: 'Saving picture error'
+        });
         this.showAlert("Saving error", err.toString(), "OK");
       }
     );
