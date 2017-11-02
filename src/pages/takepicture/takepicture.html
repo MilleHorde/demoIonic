@@ -24,12 +24,12 @@
     </ion-card>
   </div>
   <div  *ngIf="srcVideo">
-    <video controls width="100%">
-      <source src="{{srcVideo}}" type="video/mp4">
-    </video>
     <button ion-fab (click)="closeCurrentVideo()">
       <ion-icon name="close"></ion-icon>
     </button>
+    <video controls width="100%" height="250px">
+      <source src="{{srcVideo}}" type="video/mp4">
+    </video>
   </div>
 
 </ion-content>
