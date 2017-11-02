@@ -25,7 +25,7 @@
   </div>
   <div  *ngIf="srcVideo">
     <video controls>
-      <source [src]="srcVideo.fullPath" type="video/mp4">
+      <source [src]="srcVideo" type="video/mp4">
       <button ion-fab (click)="closeCurrentVideo()">
         <ion-icon name="close"></ion-icon>
       </button>
