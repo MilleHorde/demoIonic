@@ -24,15 +24,8 @@
     </ion-card>
   </div>
   <div>
-    <ion-card *ngIf="srcVideo">
-      <video [src]="srcVideo.fullPath" autoplay>!
-      </video>
-      <ion-fab right top>
-        <button ion-fab (click)="closeCurrentVideo()">
-          <ion-icon name="close"></ion-icon>
-        </button>
-      </ion-fab>
-    </ion-card>
+    <video [src]="srcVideo.fullPath" autoplay>
+    </video>
   </div>
 
 </ion-content>

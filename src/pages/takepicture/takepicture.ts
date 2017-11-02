@@ -48,7 +48,7 @@ export class TakePicturePage {
     let options: CaptureImageOptions = { limit: 1 };
     this.mediaCapture.captureVideo(options)
       .then(
-        (data: MediaFile[]) => this.srcVideo = data,
+        (data: MediaFile[]) => this.srcVideo = data[0],
         (err: CaptureError) => alert(err)
       );
   }
