@@ -49,7 +49,15 @@ export class TakePicturePage {
     this.mediaCapture.captureVideo(options)
       .then(
         (data: MediaFile[]) => {
-          this.srcVideo = data[0].fullPath.replace("file://", "");
+          let video = {};
+          let options = {
+            sourceType: 2,
+            mediaType: 1
+          };
+
+          this.camera.getPicture(options).then((data) => {
+            this.srcVideo = data;
+          });
         },
         (err: CaptureError) => alert(err)
       );
